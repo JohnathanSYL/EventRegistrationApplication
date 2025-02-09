@@ -1,0 +1,58 @@
+﻿@page "/venues/details"
+@using Microsoft.EntityFrameworkCore
+@using EventRegistrationApplication.Domain
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Venue</h2>
+    <hr />
+    @if (venue is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">VenueName</dt>
+            <dd class="col-sm-10">@venue.VenueName</dd>
+            <dt class="col-sm-2">Location</dt>
+            <dd class="col-sm-10">@venue.Location</dd>
+            <dt class="col-sm-2">Capacity</dt>
+            <dd class="col-sm-10">@venue.Capacity</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@venue.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@venue.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@venue.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@venue.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/venues/edit?venueid={venue.VenueId}")">Edit</a> |
+            <a href="@($"/venues")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Venue? venue;
+
+    [SupplyParameterFromQuery]
+    private int VenueId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        venue = await context.Venue.FirstOrDefaultAsync(m => m.VenueId == VenueId);
+
+        if (venue is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

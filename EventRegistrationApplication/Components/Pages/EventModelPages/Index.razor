@@ -1,0 +1,49 @@
+﻿@page "/eventmodels"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using EventRegistrationApplication.Domain
+@using EventRegistrationApplication.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="eventmodels/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.EventModel">
+    <PropertyColumn Property="eventmodel => eventmodel.EventName" />
+    <PropertyColumn Property="eventmodel => eventmodel.Date" />
+    <PropertyColumn Property="eventmodel => eventmodel.Location" />
+    <PropertyColumn Property="eventmodel => eventmodel.Description" />
+    <PropertyColumn Property="eventmodel => eventmodel.VenueId" />
+    <PropertyColumn Property="eventmodel => eventmodel.CategoryId" />
+    <PropertyColumn Property="eventmodel => eventmodel.StatusId" />
+    <PropertyColumn Property="eventmodel => eventmodel.UserId" />
+    <PropertyColumn Property="eventmodel => eventmodel.DateOut" />
+    <PropertyColumn Property="eventmodel => eventmodel.DateIn" />
+    <PropertyColumn Property="eventmodel => eventmodel.DateCreated" />
+    <PropertyColumn Property="eventmodel => eventmodel.DateUpdated" />
+    <PropertyColumn Property="eventmodel => eventmodel.CreatedBy" />
+    <PropertyColumn Property="eventmodel => eventmodel.UpdatedBy" />
+
+    <TemplateColumn Context="eventmodel">
+        <a href="@($"eventmodels/edit?eventid={eventmodel.EventId}")">Edit</a> |
+        <a href="@($"eventmodels/details?eventid={eventmodel.EventId}")">Details</a> |
+        <a href="@($"eventmodels/delete?eventid={eventmodel.EventId}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private EventRegistrationApplicationContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

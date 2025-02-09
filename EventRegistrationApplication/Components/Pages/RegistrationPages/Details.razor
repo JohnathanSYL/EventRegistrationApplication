@@ -1,0 +1,60 @@
+﻿@page "/registrations/details"
+@using Microsoft.EntityFrameworkCore
+@using EventRegistrationApplication.Domain
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Registration</h2>
+    <hr />
+    @if (registration is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">UserId</dt>
+            <dd class="col-sm-10">@registration.UserId</dd>
+            <dt class="col-sm-2">EventId</dt>
+            <dd class="col-sm-10">@registration.EventId</dd>
+            <dt class="col-sm-2">RegistrationDate</dt>
+            <dd class="col-sm-10">@registration.RegistrationDate</dd>
+            <dt class="col-sm-2">SeatsReserved</dt>
+            <dd class="col-sm-10">@registration.SeatsReserved</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@registration.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@registration.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@registration.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@registration.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/registrations/edit?registrationid={registration.RegistrationId}")">Edit</a> |
+            <a href="@($"/registrations")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Registration? registration;
+
+    [SupplyParameterFromQuery]
+    private int RegistrationId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        registration = await context.Registration.FirstOrDefaultAsync(m => m.RegistrationId == RegistrationId);
+
+        if (registration is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

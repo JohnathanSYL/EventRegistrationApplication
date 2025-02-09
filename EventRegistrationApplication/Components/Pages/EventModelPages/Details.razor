@@ -1,0 +1,72 @@
+﻿@page "/eventmodels/details"
+@using Microsoft.EntityFrameworkCore
+@using EventRegistrationApplication.Domain
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>EventModel</h2>
+    <hr />
+    @if (eventmodel is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">EventName</dt>
+            <dd class="col-sm-10">@eventmodel.EventName</dd>
+            <dt class="col-sm-2">Date</dt>
+            <dd class="col-sm-10">@eventmodel.Date</dd>
+            <dt class="col-sm-2">Location</dt>
+            <dd class="col-sm-10">@eventmodel.Location</dd>
+            <dt class="col-sm-2">Description</dt>
+            <dd class="col-sm-10">@eventmodel.Description</dd>
+            <dt class="col-sm-2">VenueId</dt>
+            <dd class="col-sm-10">@eventmodel.VenueId</dd>
+            <dt class="col-sm-2">CategoryId</dt>
+            <dd class="col-sm-10">@eventmodel.CategoryId</dd>
+            <dt class="col-sm-2">StatusId</dt>
+            <dd class="col-sm-10">@eventmodel.StatusId</dd>
+            <dt class="col-sm-2">UserId</dt>
+            <dd class="col-sm-10">@eventmodel.UserId</dd>
+            <dt class="col-sm-2">DateOut</dt>
+            <dd class="col-sm-10">@eventmodel.DateOut</dd>
+            <dt class="col-sm-2">DateIn</dt>
+            <dd class="col-sm-10">@eventmodel.DateIn</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@eventmodel.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@eventmodel.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@eventmodel.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@eventmodel.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/eventmodels/edit?eventid={eventmodel.EventId}")">Edit</a> |
+            <a href="@($"/eventmodels")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private EventModel? eventmodel;
+
+    [SupplyParameterFromQuery]
+    private int EventId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        eventmodel = await context.EventModel.FirstOrDefaultAsync(m => m.EventId == EventId);
+
+        if (eventmodel is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

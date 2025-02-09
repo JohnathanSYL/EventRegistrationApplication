@@ -1,0 +1,43 @@
+﻿@page "/registrations"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using EventRegistrationApplication.Domain
+@using EventRegistrationApplication.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+
+<PageTitle>Index</PageTitle>
+
+<h1>Index</h1>
+
+<p>
+    <a href="registrations/create">Create New</a>
+</p>
+
+<QuickGrid Class="table" Items="context.Registration">
+    <PropertyColumn Property="registration => registration.UserId" />
+    <PropertyColumn Property="registration => registration.EventId" />
+    <PropertyColumn Property="registration => registration.RegistrationDate" />
+    <PropertyColumn Property="registration => registration.SeatsReserved" />
+    <PropertyColumn Property="registration => registration.DateCreated" />
+    <PropertyColumn Property="registration => registration.DateUpdated" />
+    <PropertyColumn Property="registration => registration.CreatedBy" />
+    <PropertyColumn Property="registration => registration.UpdatedBy" />
+
+    <TemplateColumn Context="registration">
+        <a href="@($"registrations/edit?registrationid={registration.RegistrationId}")">Edit</a> |
+        <a href="@($"registrations/details?registrationid={registration.RegistrationId}")">Details</a> |
+        <a href="@($"registrations/delete?registrationid={registration.RegistrationId}")">Delete</a>
+    </TemplateColumn>
+</QuickGrid>
+
+@code {
+    private EventRegistrationApplicationContext context = default!;
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

@@ -1,0 +1,54 @@
+﻿@page "/statuses/details"
+@using Microsoft.EntityFrameworkCore
+@using EventRegistrationApplication.Domain
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Status</h2>
+    <hr />
+    @if (status is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">StatusName</dt>
+            <dd class="col-sm-10">@status.StatusName</dd>
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@status.DateCreated</dd>
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@status.DateUpdated</dd>
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@status.CreatedBy</dd>
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@status.UpdatedBy</dd>
+        </dl>
+        <div>
+            <a href="@($"/statuses/edit?statusid={status.StatusId}")">Edit</a> |
+            <a href="@($"/statuses")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Status? status;
+
+    [SupplyParameterFromQuery]
+    private int StatusId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        status = await context.Status.FirstOrDefaultAsync(m => m.StatusId == StatusId);
+
+        if (status is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

@@ -1,0 +1,109 @@
+﻿@page "/eventmodels/create"
+@using Microsoft.EntityFrameworkCore
+@using EventRegistrationApplication.Domain
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>EventModel</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="EventModel" OnValidSubmit="AddEventModel" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" role="alert"/>
+            <div class="mb-3">
+                <label for="eventname" class="form-label">EventName:</label> 
+                <InputText id="eventname" @bind-Value="EventModel.EventName" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.EventName" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="date" class="form-label">Date:</label> 
+                <InputDate id="date" @bind-Value="EventModel.Date" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.Date" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="location" class="form-label">Location:</label> 
+                <InputText id="location" @bind-Value="EventModel.Location" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.Location" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label> 
+                <InputText id="description" @bind-Value="EventModel.Description" class="form-control" /> 
+                <ValidationMessage For="() => EventModel.Description" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="venueid" class="form-label">VenueId:</label> 
+                <InputNumber id="venueid" @bind-Value="EventModel.VenueId" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.VenueId" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="categoryid" class="form-label">CategoryId:</label> 
+                <InputNumber id="categoryid" @bind-Value="EventModel.CategoryId" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.CategoryId" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="statusid" class="form-label">StatusId:</label> 
+                <InputNumber id="statusid" @bind-Value="EventModel.StatusId" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.StatusId" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="userid" class="form-label">UserId:</label> 
+                <InputNumber id="userid" @bind-Value="EventModel.UserId" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.UserId" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="dateout" class="form-label">DateOut:</label> 
+                <InputDate id="dateout" @bind-Value="EventModel.DateOut" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.DateOut" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="datein" class="form-label">DateIn:</label> 
+                <InputDate id="datein" @bind-Value="EventModel.DateIn" class="form-control" aria-required="true"/> 
+                <ValidationMessage For="() => EventModel.DateIn" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="datecreated" class="form-label">DateCreated:</label> 
+                <InputDate id="datecreated" @bind-Value="EventModel.DateCreated" class="form-control" /> 
+                <ValidationMessage For="() => EventModel.DateCreated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="dateupdated" class="form-label">DateUpdated:</label> 
+                <InputDate id="dateupdated" @bind-Value="EventModel.DateUpdated" class="form-control" /> 
+                <ValidationMessage For="() => EventModel.DateUpdated" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="createdby" class="form-label">CreatedBy:</label> 
+                <InputText id="createdby" @bind-Value="EventModel.CreatedBy" class="form-control" /> 
+                <ValidationMessage For="() => EventModel.CreatedBy" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="updatedby" class="form-label">UpdatedBy:</label> 
+                <InputText id="updatedby" @bind-Value="EventModel.UpdatedBy" class="form-control" /> 
+                <ValidationMessage For="() => EventModel.UpdatedBy" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/eventmodels">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private EventModel EventModel { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddEventModel()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.EventModel.Add(EventModel);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/eventmodels");
+    }
+}

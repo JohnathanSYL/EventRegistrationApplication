@@ -1,0 +1,149 @@
+﻿.pearlescent-bg {
+    background: linear-gradient(135deg, #5a1f8d, #9b2a9f, #6a1e93, #8e2a8f);
+    background-size: 400% 400%;
+    animation: pearlescentAnimation 3s ease infinite;
+    color: #fff;
+    border-radius: 20px;
+    padding: 40px; 
+    text-align: center; 
+    max-width: 100%; 
+    margin: 0 auto; 
+}
+
+@keyframes pearlescentAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.banner h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700; 
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.banner p {
+    font-family: 'Arial', sans-serif; /* Change to a simple and clean font */
+    font-size: 1.25rem; /* Smaller font size for the paragraph */
+    font-weight: normal;
+    letter-spacing: 0.5px; /* Slight letter spacing */
+    opacity: 0.9; /* Slightly reduce opacity */
+    line-height: 1.6; /* Improve line height for paragraph readability */
+    max-width: 100%; /* Ensure it stretches across the screen */
+    margin: 0 auto; /* Center the paragraph */
+    white-space: nowrap; /* Keep the text in one line */
+    overflow: hidden; /* Prevent overflow */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+}
+
+/* Date Banner Styles */
+.date-banner {
+    background-color: #f0f0f0; /* Light Gray Background */
+    color: #333; /* Darker text color for contrast */
+    font-size: 1.5rem; /* Adjusted font size */
+    font-weight: 600; /* Slightly bolder font */
+    font-family: 'Roboto', sans-serif; /* Nicer font */
+    border-radius: 15px; /* Rounded corners */
+    margin-top: 30px; /* Adds spacing between main banner and date banner */
+    padding: 40px 0; /* Increased padding for bigger banner */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for extra depth */
+}
+
+    /* Style for the Countdown Timer */
+    .date-banner h2 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 2.5rem; /* Increase size of countdown timer */
+        font-weight: 700; /* Bolder font for the countdown */
+        color: #6a0dad; /* Dark purple color for countdown */
+        margin-top: 20px;
+    }
+
+    /* Optional: Customize text styling */
+    .date-banner p, .date-banner h3, .date-banner h2 {
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .date-banner h3 {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+/* Add custom purple color for buttons */
+.btn-purple {
+    background-color: #6a1e93; /* Purple color */
+    color: white;
+    border-radius: 30px; /* Rounded button */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+    .btn-purple:hover {
+        background-color: #9b2a9f; /* Lighter purple on hover */
+        cursor: pointer;
+    }
+
+/* Card container adjustments */
+.card {
+    border: none; /* Remove default border */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for the card */
+    border-radius: 15px; /* Rounded corners for the card */
+}
+
+/* Add border-radius to card images */
+.card-img-top {
+    border-radius: 15px 15px 0 0; /* Rounded top corners for the image */
+}
+
+/* Adjust the card title and text */
+.card-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Add padding and alignment to text */
+.text-center {
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Event Date Styling */
+.event-date {
+    font-size: 1.25rem; /* Size similar to card title */
+    font-weight: bold; /* Make the date bold */
+    color: #333; /* Dark color for the date */
+    margin-top: 10px; /* Adds space between the description and the date */
+}
+
+/* Margin adjustments for button */
+.btn {
+    margin-top: 10px;
+    padding: 10px 25px; /* Adjust padding for a more consistent button size */
+}

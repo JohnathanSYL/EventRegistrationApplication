@@ -1,0 +1,71 @@
+﻿@page "/statuses/delete"
+@using Microsoft.EntityFrameworkCore
+@using EventRegistrationApplication.Domain
+@inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>Status</h2>
+    <hr />
+    @if (status is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">StatusName</dt>
+            <dd class="col-sm-10">@status.StatusName</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">DateCreated</dt>
+            <dd class="col-sm-10">@status.DateCreated</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">DateUpdated</dt>
+            <dd class="col-sm-10">@status.DateUpdated</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">CreatedBy</dt>
+            <dd class="col-sm-10">@status.CreatedBy</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">UpdatedBy</dt>
+            <dd class="col-sm-10">@status.UpdatedBy</dd>
+        </dl>
+        <EditForm method="post" Model="status" OnValidSubmit="DeleteStatus" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(status is null)">Delete</button> |
+            <a href="/statuses">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Status? status;
+
+    [SupplyParameterFromQuery]
+    private int StatusId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        using var context = DbFactory.CreateDbContext();
+        status = await context.Status.FirstOrDefaultAsync(m => m.StatusId == StatusId);
+
+        if (status is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteStatus()
+    {
+        using var context = DbFactory.CreateDbContext();
+        context.Status.Remove(status!);
+        await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/statuses");
+    }
+}

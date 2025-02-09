@@ -1,0 +1,83 @@
+﻿@page "/events"
+@using Microsoft.AspNetCore.Components.Routing
+
+<h1 class="text-center mt-4">Upcoming Events</h1>
+
+<p class="text-center">Browse through the exciting events we have scheduled!</p>
+
+<div class="container mt-5">
+    <div class="row">
+        @foreach (var eventItem in events)
+        {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow">
+                        <img src="@eventItem.Thumbnail" class="card-img-top" alt="@eventItem.Name" />
+                        <div class="card-body">
+                            <h5 class="card-title">@eventItem.Name</h5>
+                            <p class="card-text">@eventItem.Description</p>
+                            <p class="card-text"><strong>Date:</strong> @eventItem.Date.ToString("MMMM dd, yyyy")</p>
+
+                            <!-- Explore Seats Button -->
+                            <a href="/seat-selection/@eventItem.Name.Replace(" ", "-")" class="btn btn-primary w-100">Explore Seats</a>
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<Event> events = new List<Event>
+    {
+        new Event
+        {
+            Name = "Music Event: Music Concert by JJ Lin",
+            Description = "Join us for a mesmerizing night of music with JJ Lin, one of the biggest stars in the music world.",
+            Date = new DateTime(2025, 6, 18),
+            Thumbnail = "Event Images/JJ Lin Poster.jpg"
+        },
+        new Event
+        {
+            Name = "Music Event: Music Concert by G.E.M",
+            Description = "Experience the unstoppable power of G.E.M. live—heartfelt vocals, electrifying energy, and a night of music you'll never forget!",
+            Date = new DateTime(2025, 12, 18),
+            Thumbnail = "Event Images/G.E.M.jpg"
+        },
+        new Event
+        {
+            Name = "Movie Event: Godzilla Vs Groot",
+            Description = "Witness the epic clash of the titans – Godzilla and Groot – in this highly anticipated movie event.",
+            Date = new DateTime(2025, 7, 15),
+            Thumbnail = "Event Images/Godzilla Vs Groot.jpg"
+        },
+        new Event
+        {
+            Name = "Movie Event: Hello Kitty joined the fight of the titans! ft Attack on Titans",
+            Description = "Experience the thrilling journey of Hello Kitty fighting Titans alongside Eren and Mikasa.",
+            Date = new DateTime(2025, 8, 29),
+            Thumbnail = "Event Images/HelloKittyAOT.jpg"
+        },
+        new Event
+        {
+            Name = "Football Match: Liverpool vs Man City",
+            Description = "Two titans collide as Liverpool and Man City battle for supremacy—will Anfield roar or will the Cityzens conquer?",
+            Date = new DateTime(2025, 5, 10),
+            Thumbnail = "Event Images/LiverpoolVsMancity.png"
+        },
+        new Event
+        {
+            Name = "Football Match: Arsenal vs Newcastle",
+            Description = "Fire meets steel as Arsenal clash with Newcastle—will the Gunners blaze through, or will the Magpies stand unbreakable?",
+            Date = new DateTime(2025, 9, 8),
+            Thumbnail = "Event Images/ArsenalVsNewcastle.png"
+        }
+    };
+
+    public class Event
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
+        public string Thumbnail { get; set; }
+    }
+}
