@@ -6,6 +6,8 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
 
+@attribute [Authorize(Roles = "Administrator, User")]
+
 <PageTitle>Index</PageTitle>
 
 <h1>Index</h1>
@@ -27,7 +29,9 @@
     <TemplateColumn Context="registration">
         <a href="@($"registrations/edit?registrationid={registration.RegistrationId}")">Edit</a> |
         <a href="@($"registrations/details?registrationid={registration.RegistrationId}")">Details</a> |
+        <AuthorizeView Roles="Administrator">
         <a href="@($"registrations/delete?registrationid={registration.RegistrationId}")">Delete</a>
+        </AuthorizeView>
     </TemplateColumn>
 </QuickGrid>
 

@@ -81,6 +81,7 @@
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddUser()
     {
+        Console.WriteLine("AddUser method triggered.");
         using var context = DbFactory.CreateDbContext();
         context.User.Add(User);
         await context.SaveChangesAsync();
