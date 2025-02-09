@@ -1,0 +1,41 @@
+﻿@page "/payment"
+@using Microsoft.AspNetCore.Components.Routing
+
+<h3>Select Payment Method</h3>
+
+<div class="payment-option">
+    <!-- Button 1: Card Payment -->
+    <div class="option">
+        <NavLink class="btn btn-primary" href="/cardpayment" role="button">
+            Card Payment
+        </NavLink>
+        <span class="description">Pay using your credit or debit card.</span>
+    </div>
+
+    <!-- First Divider Line -->
+    <hr />
+
+    <!-- Button 2: Bank Transfer (Dummy) -->
+    <div class="option">
+        <NavLink class="btn btn-secondary" href="/banktransfer" role="button">
+            Bank Transfer
+        </NavLink>
+        <span class="description">Transfer funds directly from your bank account.</span>
+    </div>
+
+    <!-- Second Divider Line -->
+    <hr />
+
+    <!-- Button 3: QR Payment (Dummy) -->
+    <div class="option">
+        <NavLink class="btn btn-success" href="/qrcode" role="button">
+            QR Payment
+        </NavLink>
+        <span class="description">Scan the QR code to make a payment.</span>
+    </div>
+
+    <!-- Last Divider Line with additional margin -->
+    <hr class="last-divider" />
+</div>
+
+<p>Select a payment method to proceed with your transaction.</p>

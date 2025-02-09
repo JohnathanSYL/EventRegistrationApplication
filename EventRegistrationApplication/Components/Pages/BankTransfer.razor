@@ -1,0 +1,56 @@
+﻿@page "/banktransfer"
+
+<h3>Bank Payment</h3>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Enter Your Bank Payment Details</h5>
+
+        <!-- Bank Payment Form -->
+        <EditForm Model="@bankPaymentModel" OnValidSubmit="HandleSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="accountNumber">Bank Account Number</label>
+                <InputText id="accountNumber" class="form-control" @bind-Value="bankPaymentModel.AccountNumber" />
+            </div>
+
+            <div class="form-group">
+                <label for="bankName">Bank Name</label>
+                <InputText id="bankName" class="form-control" @bind-Value="bankPaymentModel.BankName" />
+            </div>
+
+            <div class="form-group">
+                <label for="transferAmount">Transfer Amount</label>
+                <InputText id="transferAmount" class="form-control" @bind-Value="bankPaymentModel.TransferAmount" />
+            </div>
+
+            <!-- Submit Button -->
+            <NavLink class="btn btn-primary" href="/receipt" @onclick="HandleSubmit">Submit Payment</NavLink>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private BankPaymentModel bankPaymentModel = new BankPaymentModel();
+
+    // Handle form submission
+    private void HandleSubmit()
+    {
+        // Normally here, you would process the payment, for now, it's simulated.
+        Console.WriteLine($"Bank Account Number: {bankPaymentModel.AccountNumber}");
+        Console.WriteLine($"Bank Name: {bankPaymentModel.BankName}");
+        Console.WriteLine($"Transfer Amount: {bankPaymentModel.TransferAmount}");
+
+        // You can navigate to a confirmation page or do any other processing here
+        // For now, just log the form submission.
+    }
+
+    public class BankPaymentModel
+    {
+        public string? AccountNumber { get; set; }
+        public string? BankName { get; set; }
+        public string? TransferAmount { get; set; }
+    }
+}
