@@ -1,0 +1,108 @@
+﻿@page "/seat-selection/{eventName}"
+@using Microsoft.AspNetCore.Components
+
+<h2 class="text-center mt-4">Seat Map</h2>
+<p class="text-center">Availability for event.</p>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Seat Map</h4>
+            <div class="seat-map">
+                @for (int row = 0; row < seatRows; row++)
+                {
+                    <div class="seat-row">
+                        @for (int col = 0; col < seatCols; col++)
+                        {
+                            var seatId = $"{(char)('A' + row)}{col + 1}";
+                            var isBooked = bookedSeats.Contains(seatId);
+                            var tierClass = GetSeatTier(row);
+                            var statusClass = isBooked ? "booked" : "available";
+                            <div class="seat @tierClass @statusClass">@seatId</div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>Select Your Seats</h4>
+            <input type="text" class="form-control" placeholder="Enter seat IDs (e.g., A1, B3)" @bind="seatInput" />
+            <button class="btn btn-primary mt-2" @onclick="SubmitSelection">Confirm Selection</button>
+            <ul class="mt-3">
+                @foreach (var seat in selectedSeats)
+                {
+                    <li>@seat</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .seat {
+        width: 40px;
+        height: 40px;
+        margin: 5px;
+        text-align: center;
+        border-radius: 5px;
+        border: 1px solid #000;
+        display: inline-block;
+        line-height: 40px;
+    }
+
+    .vip {
+        background-color: #FFD700;
+    }
+    /* Gold */
+    .premium {
+        background-color: #C0C0C0;
+    }
+    /* Silver */
+    .standard {
+        background-color: #D3D3D3;
+    }
+    /* Light Gray */
+    .available {
+        background-color: #FFFFFF;
+    }
+    /* White */
+    .booked {
+        background-color: #FF0000;
+        color: white;
+    }
+    /* Red */
+</style>
+
+@code {
+    [Parameter] public string EventName { get; set; }
+
+    private int seatRows = 5;
+    private int seatCols = 10;
+    private List<string> bookedSeats = new(); // This will come from the database
+    private List<string> selectedSeats = new();
+    private string seatInput = "";
+
+    private string GetSeatTier(int row)
+    {
+        return row < 2 ? "vip" : row < 4 ? "premium" : "standard";
+    }
+
+    private void SubmitSelection()
+    {
+        var seats = seatInput.Split(',').Select(s => s.Trim().ToUpper()).Where(s => !string.IsNullOrEmpty(s));
+        foreach (var seat in seats)
+        {
+            if (!bookedSeats.Contains(seat) && !selectedSeats.Contains(seat))
+            {
+                selectedSeats.Add(seat);
+            }
+        }
+        seatInput = "";
+        SaveSelectionToDatabase();
+    }
+
+    private void SaveSelectionToDatabase()
+    {
+        // TODO: Implement database logic to save selectedSeats for this event
+    }
+}

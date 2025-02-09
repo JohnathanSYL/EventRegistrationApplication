@@ -1,0 +1,51 @@
+﻿@page "/cardpayment"
+@inject NavigationManager NavigationManager
+
+<h3>Card Payment</h3>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Enter Card Details</h5>
+
+        <!-- Card Payment Form -->
+        <EditForm Model="@paymentModel" OnValidSubmit="HandleSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <InputText id="cardNumber" class="form-control" @bind-Value="paymentModel.CardNumber" />
+            </div>
+
+            <div class="form-group">
+                <label for="expiryDate">Expiry Date (MM/YY)</label>
+                <InputText id="expiryDate" class="form-control" @bind-Value="paymentModel.ExpiryDate" />
+            </div>
+
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <InputText id="cvv" class="form-control" @bind-Value="paymentModel.CVV" />
+            </div>
+
+            <!-- Submit Button -->
+            <NavLink class="btn btn-primary" href="/receipt" @onclick="HandleSubmit">Pay Now</NavLink>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private PaymentModel paymentModel = new PaymentModel();
+
+    // Handle form submission, simulate payment process
+    private void HandleSubmit()
+    {
+        // Normally you would process payment here, for now, we simulate the payment by just navigating
+    }
+
+    public class PaymentModel
+    {
+        public string? CardNumber { get; set; }
+        public string? ExpiryDate { get; set; }
+        public string? CVV { get; set; }
+    }
+}

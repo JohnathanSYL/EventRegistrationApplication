@@ -1,0 +1,40 @@
+﻿@page "/qrcode"
+@using QRCoder
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components.Routing
+
+<h3>Generate QR Code for Payment</h3>
+
+<div class="qr-container">
+    <p>Scan the QR code to proceed to payment.</p>
+    <img src="@QrCodeImageUrl" alt="QR Code" />
+
+    <!-- Use NavLink to navigate to the Receipt page -->
+    <NavLink class="btn btn-primary" href="/receipt">Go to Receipt</NavLink>
+</div>
+
+@code {
+    private string QrCodeImageUrl = "";
+
+    // This runs when the page is initialized
+    protected override void OnInitialized()
+    {
+        // The URL to the receipt page
+        string paymentPageUrl = NavigationManager.ToAbsoluteUri("/receipt").ToString();
+
+        // Generate the QR code for the payment page URL
+        QrCodeImageUrl = GenerateQrCode(paymentPageUrl);
+    }
+
+    // Method to generate the QR code as a base64 image
+    private string GenerateQrCode(string url)
+    {
+        var qrGenerator = new QRCodeGenerator();
+        var qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
+        var qrCode = new BitmapByteQRCode(qrCodeData);
+        var qrCodeBytes = qrCode.GetGraphic(20); // Adjust pixel size here
+
+        // Return the image as a base64-encoded string
+        return $"data:image/png;base64,{Convert.ToBase64String(qrCodeBytes)}";
+    }
+}
