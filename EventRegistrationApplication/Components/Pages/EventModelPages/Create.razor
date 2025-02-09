@@ -36,15 +36,31 @@
                 <ValidationMessage For="() => EventModel.Description" class="text-danger" /> 
             </div>        
             <div class="mb-3">
-                <label for="venueid" class="form-label">VenueId:</label> 
-                <InputNumber id="venueid" @bind-Value="EventModel.VenueId" class="form-control" aria-required="true"/> 
-                <ValidationMessage For="() => EventModel.VenueId" class="text-danger" /> 
+                <label for="venueid" class="form-label">Venue:</label> 
+                <InputSelect id="venueid" @bind-Value="EventModel.VenueId" class="form-control">
+                    <option value="">-- Select Venue --</option>
+                    @if (Venues != null)
+                    {
+                        foreach (var venue in Venues)
+                        {
+                            <option value="@venue.VenueId">@venue.VenueName</option>
+                        }
+                    }
+                </InputSelect>
             </div>        
             <div class="mb-3">
-                <label for="categoryid" class="form-label">CategoryId:</label> 
-                <InputNumber id="categoryid" @bind-Value="EventModel.CategoryId" class="form-control" aria-required="true"/> 
-                <ValidationMessage For="() => EventModel.CategoryId" class="text-danger" /> 
-            </div>        
+                <label for="categoryid" class="form-label">Category:</label>
+                <InputSelect id="categoryid" @bind-Value="EventModel.CategoryId" class="form-control">
+                    <option value="">-- Select Category --</option>
+                    @if (Categories != null)
+                    {
+                        foreach (var category in Categories) // Use 'category' instead of 'make'
+                        {
+                            <option value="@category.CategoryId">@category.CategoryName</option> <!-- Corrected property names -->
+                        }
+                    }
+                </InputSelect>
+            </div>
             <div class="mb-3">
                 <label for="statusid" class="form-label">StatusId:</label> 
                 <InputNumber id="statusid" @bind-Value="EventModel.StatusId" class="form-control" aria-required="true"/> 
@@ -97,6 +113,19 @@
 @code {
     [SupplyParameterFromForm]
     private EventModel EventModel { get; set; } = new();
+
+    //Declare and initialize EventRegistrationApplication and IList
+    private EventRegistrationApplicationContext context = default!;
+    private IList<Category> Categories;
+    private IList<Venue> Venues;
+
+    //OnInitialized method to get all Categories & Venues
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+        Categories = context.Category.ToList();
+        Venues = context.Venue.ToList();
+    }
 
     // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task AddEventModel()

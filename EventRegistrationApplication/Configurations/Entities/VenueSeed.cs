@@ -12,9 +12,33 @@ namespace EventRegistrationApplication.Configurations.Entities
                 new Venue
                 {
                     VenueId = 1,
-                    VenueName = "Convention Center",
-                    Location = "Los Angeles",
-                    Capacity = 500,
+                    VenueName = "National Stadium",
+                    Location = "Singapore",
+                    Capacity = 55000,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    CreatedBy = "System",
+                    UpdatedBy = "System"
+                },
+
+                new Venue
+                {
+                    VenueId = 2,
+                    VenueName = "Singapore Indoor Stadium",
+                    Location = "Singapore",
+                    Capacity = 12000,
+                    DateCreated = DateTime.Now,
+                    DateUpdated = DateTime.Now,
+                    CreatedBy = "System",
+                    UpdatedBy = "System"
+                },
+
+                new Venue
+                {
+                    VenueId = 3,
+                    VenueName = "Gateway Theatre (Main Theatre)",
+                    Location = "Singapore",
+                    Capacity = 922,
                     DateCreated = DateTime.Now,
                     DateUpdated = DateTime.Now,
                     CreatedBy = "System",
