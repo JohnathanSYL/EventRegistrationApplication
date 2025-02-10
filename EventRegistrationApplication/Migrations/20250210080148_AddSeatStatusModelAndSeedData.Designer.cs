@@ -4,6 +4,7 @@ using EventRegistrationApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventRegistrationApplication.Migrations
 {
     [DbContext(typeof(EventRegistrationApplicationContext))]
-    partial class EventRegistrationApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250210080148_AddSeatStatusModelAndSeedData")]
+    partial class AddSeatStatusModelAndSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
