@@ -14,6 +14,7 @@ namespace EventRegistrationApplication.Data
         public DbSet<EventRegistrationApplication.Domain.Status> Status { get; set; } = default!;
         public DbSet<EventRegistrationApplication.Domain.User> User { get; set; } = default!;
         public DbSet<EventRegistrationApplication.Domain.Venue> Venue { get; set; } = default!;
+        public DbSet<EventRegistrationApplication.Domain.SeatSelection> SeatSelection { get; set; } = default!; 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -27,6 +28,7 @@ namespace EventRegistrationApplication.Data
             builder.ApplyConfiguration(new UserRoleSeed());
             builder.ApplyConfiguration(new UserSeed());
             builder.ApplyConfiguration(new VenueSeed());
+            builder.ApplyConfiguration(new SeatSelectionSeed());
         }
     }
-}
+} 
