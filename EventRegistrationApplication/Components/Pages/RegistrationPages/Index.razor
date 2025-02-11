@@ -5,37 +5,47 @@
 @using EventRegistrationApplication.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@rendermode InteractiveServer
 
 @attribute [Authorize(Roles = "Administrator, User")]
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Registrations</PageTitle>
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Registrations</h1>
+        <a class="btn btn-primary" href="registrations/create">Create New</a>
+    </div>
 
-<p>
-    <a href="registrations/create">Create New</a>
-</p>
+    <div class="table-responsive">
+        <QuickGrid Class="table table-striped table-hover" Items="context.Registration" Pagination="paginationState">
+            <PropertyColumn Property="registration => registration.UserId" Title="User ID" Sortable="true" />
+            <PropertyColumn Property="registration => registration.EventId" Title="Event ID" Sortable="true" />
+            <PropertyColumn Property="registration => registration.RegistrationDate" Title="Registration Date" Sortable="true" />
+            <PropertyColumn Property="registration => registration.SeatsReserved" Title="Seats Reserved" Sortable="true" />
+            <PropertyColumn Property="registration => registration.DateCreated" Title="Date Created" Sortable="true" />
+            <PropertyColumn Property="registration => registration.DateUpdated" Title="Date Updated" Sortable="true" />
+            <PropertyColumn Property="registration => registration.CreatedBy" Title="Created By" Sortable="true" />
+            <PropertyColumn Property="registration => registration.UpdatedBy" Title="Updated By" Sortable="true" />
 
-<QuickGrid Class="table" Items="context.Registration">
-    <PropertyColumn Property="registration => registration.UserId" />
-    <PropertyColumn Property="registration => registration.EventId" />
-    <PropertyColumn Property="registration => registration.RegistrationDate" />
-    <PropertyColumn Property="registration => registration.SeatsReserved" />
-    <PropertyColumn Property="registration => registration.DateCreated" />
-    <PropertyColumn Property="registration => registration.DateUpdated" />
-    <PropertyColumn Property="registration => registration.CreatedBy" />
-    <PropertyColumn Property="registration => registration.UpdatedBy" />
+            <TemplateColumn Context="registration">
+                <div class="d-flex">
+                    <a class="btn btn-sm btn-warning me-2" href="@($"registrations/edit?registrationid={registration.RegistrationId}")">Edit</a>
+                    <a class="btn btn-sm btn-info me-2" href="@($"registrations/details?registrationid={registration.RegistrationId}")">Details</a>
+                    <AuthorizeView Roles="Administrator">
+                        <a class="btn btn-sm btn-danger" href="@($"registrations/delete?registrationid={registration.RegistrationId}")">Delete</a>
+                    </AuthorizeView>
+                </div>
+            </TemplateColumn>
+        </QuickGrid>
 
-    <TemplateColumn Context="registration">
-        <a href="@($"registrations/edit?registrationid={registration.RegistrationId}")">Edit</a> |
-        <a href="@($"registrations/details?registrationid={registration.RegistrationId}")">Details</a> |
-        <AuthorizeView Roles="Administrator">
-        <a href="@($"registrations/delete?registrationid={registration.RegistrationId}")">Delete</a>
-        </AuthorizeView>
-    </TemplateColumn>
-</QuickGrid>
+        <Paginator State="paginationState" />
+    </div>
+</div>
 
 @code {
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 10 };
+
     private EventRegistrationApplicationContext context = default!;
 
     protected override void OnInitialized()

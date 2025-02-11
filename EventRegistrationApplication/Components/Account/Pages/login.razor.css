@@ -1,0 +1,119 @@
+﻿/* Glowing Dark Purple Background */
+.login-background {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #4f1c74, #7a3c94, #3d0c5c);
+    background-size: 300% 300%;
+    animation: glowing-background 10s ease-in-out infinite;
+}
+
+/* Glowing Background Animation */
+@keyframes glowing-background {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+/* Login Form Container */
+.login-form-container {
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 400px; /* Fixed max-width */
+    margin: 0 auto;
+}
+
+/* Text Centering and Formatting */
+h2.text-center {
+    font-size: 1.5rem;
+    color: #3d0c5c;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #4f1c74;
+    border-color: #4f1c74;
+    transition: background-color 0.3s;
+}
+
+    .btn-primary:hover {
+        background-color: #7a3c94;
+        border-color: #7a3c94;
+    }
+
+/* Input Fields Styling */
+input, .form-check-input {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+    input:focus, .form-check-input:focus {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    }
+
+/* Link Styling */
+a {
+    color: #4f1c74;
+    transition: color 0.3s ease;
+}
+
+    a:hover {
+        color: #7a3c94;
+    }
+
+/* Mobile-Friendly Layout Adjustments */
+@media (max-width: 768px) {
+    .login-form-container {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .btn-primary {
+        font-size: 1.1rem;
+    }
+}
+
+/* Style for the link container */
+.link-container {
+    margin-top: 20px;
+}
+
+/* Link styling */
+.link-style {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #4f1c74; /* Purple color */
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 0;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+    /* Link hover effect */
+    .link-style:hover {
+        color: #7a3c94; /* Light purple on hover */
+        transform: translateY(-2px); /* Slightly lift on hover */
+    }
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .link-container {
+        padding: 10px;
+    }
+
+    .link-style {
+        font-size: 0.95rem;
+    }
+}

@@ -1,9 +1,21 @@
 ﻿@page "/payment"
-@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager Navigation
 
 <h3>Select Payment Method</h3>
 
-<div class="payment-option">
+<div class="container mt-4">
+    <!-- Display the total amount from seat-selection.razor -->
+    <div class="row">
+        <div class="col-md-6">
+            <label>Total Amount:</label>
+            <input type="text" class="form-control" value="@totalAmount" disabled />
+        </div>
+    </div>
+</div>
+
+<div class="payment-option mt-4">
     <!-- Button 1: Card Payment -->
     <div class="option">
         <NavLink class="btn btn-primary" href="/cardpayment" role="button">
@@ -39,3 +51,19 @@
 </div>
 
 <p>Select a payment method to proceed with your transaction.</p>
+
+@code {
+    private decimal totalAmount;
+
+    protected override void OnInitialized()
+    {
+        // Extract the totalAmount from the query string
+        var queryParams = Navigation.ToAbsoluteUri(Navigation.Uri).Query;
+        var queryDictionary = QueryHelpers.ParseQuery(queryParams);
+
+        if (queryDictionary.TryGetValue("totalAmount", out var amount))
+        {
+            totalAmount = decimal.TryParse(amount, out var parsedAmount) ? parsedAmount : 0;
+        }
+    }
+}

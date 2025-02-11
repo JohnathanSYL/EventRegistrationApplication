@@ -14,21 +14,33 @@
 
             <div class="form-group">
                 <label for="cardNumber">Card Number</label>
-                <InputText id="cardNumber" class="form-control" @bind-Value="paymentModel.CardNumber" />
+                <InputText id="cardNumber" class="form-control" @bind-Value="paymentModel.CardNumber"
+                           MaxLength="16" MinLength="16"
+                           OnInput="ValidateCardNumber"
+                           pattern="^\d{16}$" />
             </div>
 
             <div class="form-group">
-                <label for="expiryDate">Expiry Date (MM/YY)</label>
-                <InputText id="expiryDate" class="form-control" @bind-Value="paymentModel.ExpiryDate" />
+                <label for="expiry">Expiry Date (MM/YY)</label>
+                <InputText id="expiry" class="form-control" @bind-Value="paymentModel.Expiry"
+                           MaxLength="5" MinLength="5"
+                           OnInput="ValidateExpiryDate"
+                           placeholder="MM/YY"
+                           pattern="^(0[1-9]|1[0-2])\/[0-9]{2}$" />
             </div>
 
             <div class="form-group">
                 <label for="cvv">CVV</label>
-                <InputText id="cvv" class="form-control" @bind-Value="paymentModel.CVV" />
+                <InputText id="cvv" class="form-control" @bind-Value="paymentModel.CVV"
+                           MaxLength="3" MinLength="3"
+                           OnInput="ValidateCVV"
+                           pattern="^\d{3}$" />
             </div>
 
             <!-- Submit Button -->
             <NavLink class="btn btn-primary" href="/receipt" @onclick="HandleSubmit">Pay Now</NavLink>
+
+            <NavLink class="btn btn-primary" href="/payment" @onclick="HandleSubmit">Back to Payment Methods</NavLink>
         </EditForm>
     </div>
 </div>
@@ -42,10 +54,37 @@
         // Normally you would process payment here, for now, we simulate the payment by just navigating
     }
 
+    private void ValidateCardNumber(ChangeEventArgs e)
+    {
+        // Ensure the card number is only up to 16 digits
+        if (paymentModel.CardNumber?.Length > 16)
+        {
+            paymentModel.CardNumber = paymentModel.CardNumber.Substring(0, 16);
+        }
+    }
+
+    private void ValidateCVV(ChangeEventArgs e)
+    {
+        // Ensure the CVV is only 3 digits
+        if (paymentModel.CVV?.Length > 3)
+        {
+            paymentModel.CVV = paymentModel.CVV.Substring(0, 3);
+        }
+    }
+
+    private void ValidateExpiryDate(ChangeEventArgs e)
+    {
+        // Ensure the expiry date follows the MM/YY format
+        if (paymentModel.Expiry?.Length > 5)
+        {
+            paymentModel.Expiry = paymentModel.Expiry.Substring(0, 5); // "MM/YY"
+        }
+    }
+
     public class PaymentModel
     {
         public string? CardNumber { get; set; }
-        public string? ExpiryDate { get; set; }
+        public string? Expiry { get; set; }
         public string? CVV { get; set; }
     }
 }

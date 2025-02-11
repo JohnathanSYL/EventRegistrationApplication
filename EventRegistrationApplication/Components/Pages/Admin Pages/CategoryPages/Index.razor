@@ -5,30 +5,38 @@
 @using EventRegistrationApplication.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@rendermode InteractiveServer
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Categories</PageTitle>
 
-<h1>Index</h1>
+<h1 class="mb-4">Categories</h1>
 
-<p>
-    <a href="categories/create">Create New</a>
-</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <p class="lead">Manage your categories below:</p>
+    <a href="categories/create" class="btn btn-success">Create New Category</a>
+</div>
 
-<QuickGrid Class="table" Items="context.Category">
-    <PropertyColumn Property="category => category.CategoryName" />
-    <PropertyColumn Property="category => category.DateCreated" />
-    <PropertyColumn Property="category => category.DateUpdated" />
-    <PropertyColumn Property="category => category.CreatedBy" />
-    <PropertyColumn Property="category => category.UpdatedBy" />
+<QuickGrid Class="table table-striped table-hover table-bordered" Items="context.Category" Pagination="paginationState">
+    <PropertyColumn Property="category => category.CategoryName" Title="Category Name" Sortable="true" />
+    <PropertyColumn Property="category => category.DateCreated" Title="Date Created" Sortable="true" />
+    <PropertyColumn Property="category => category.DateUpdated" Title="Last Updated" Sortable="true" />
+    <PropertyColumn Property="category => category.CreatedBy" Title="Created By" Sortable="true" />
+    <PropertyColumn Property="category => category.UpdatedBy" Title="Updated By" Sortable="true" />
 
     <TemplateColumn Context="category">
-        <a href="@($"categories/edit?categoryid={category.CategoryId}")">Edit</a> |
-        <a href="@($"categories/details?categoryid={category.CategoryId}")">Details</a> |
-        <a href="@($"categories/delete?categoryid={category.CategoryId}")">Delete</a>
+        <div class="d-flex justify-content-around">
+            <a href="@($"categories/edit?categoryid={category.CategoryId}")" class="btn btn-warning btn-sm me-2">Edit</a>
+            <a href="@($"categories/details?categoryid={category.CategoryId}")" class="btn btn-info btn-sm me-2">Details</a>
+            <a href="@($"categories/delete?categoryid={category.CategoryId}")" class="btn btn-danger btn-sm">Delete</a>
+        </div>
     </TemplateColumn>
 </QuickGrid>
 
+<Paginator State="paginationState" />
+
 @code {
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 20 };
+
     private EventRegistrationApplicationContext context = default!;
 
     protected override void OnInitialized()

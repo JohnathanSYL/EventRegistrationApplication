@@ -4,6 +4,7 @@ using EventRegistrationApplication.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EventRegistrationApplication.Migrations
 {
     [DbContext(typeof(EventRegistrationApplicationContext))]
-    partial class EventRegistrationApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250211020006_AddRegistrationUserForeignKey")]
+    partial class AddRegistrationUserForeignKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,8 +61,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 1,
                             CategoryName = "Sports & Fitness",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3709),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3734),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8055),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8075),
                             UpdatedBy = "System"
                         },
                         new
@@ -67,8 +70,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 2,
                             CategoryName = "Music & Concert",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3743),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3744),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8082),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8084),
                             UpdatedBy = "System"
                         },
                         new
@@ -76,8 +79,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 3,
                             CategoryName = "Movies",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3749),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3750),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8089),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8090),
                             UpdatedBy = "System"
                         },
                         new
@@ -85,8 +88,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 4,
                             CategoryName = "Arts & Culture",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3761),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3762),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8094),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8095),
                             UpdatedBy = "System"
                         },
                         new
@@ -94,8 +97,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 5,
                             CategoryName = "Conferences & Seminars",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3766),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3767),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8099),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8100),
                             UpdatedBy = "System"
                         },
                         new
@@ -103,8 +106,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 6,
                             CategoryName = "Education & Workshops",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3770),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3772),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8104),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8105),
                             UpdatedBy = "System"
                         },
                         new
@@ -112,8 +115,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 7,
                             CategoryName = "Festivals & Celebrations",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3776),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3777),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8109),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8110),
                             UpdatedBy = "System"
                         },
                         new
@@ -121,8 +124,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 8,
                             CategoryName = "Trade Shows & Expos",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3780),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3782),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8114),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8115),
                             UpdatedBy = "System"
                         },
                         new
@@ -130,8 +133,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 9,
                             CategoryName = "Science & Innovation",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3785),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3786),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8119),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8120),
                             UpdatedBy = "System"
                         },
                         new
@@ -139,8 +142,8 @@ namespace EventRegistrationApplication.Migrations
                             CategoryId = 10,
                             CategoryName = "Gaming & Esports",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3790),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(3791),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8124),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8125),
                             UpdatedBy = "System"
                         });
                 });
@@ -212,11 +215,11 @@ namespace EventRegistrationApplication.Migrations
                             EventId = 1,
                             CategoryId = 1,
                             CreatedBy = "System",
-                            Date = new DateTime(2025, 5, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4419),
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4465),
+                            Date = new DateTime(2025, 5, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8676),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8691),
                             DateIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOut = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4490),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8692),
                             Description = "A thrilling Premier League clash between Liverpool and Man City.",
                             EventName = "Football Match: Liverpool vs Man City",
                             Location = "National Stadium",
@@ -230,11 +233,11 @@ namespace EventRegistrationApplication.Migrations
                             EventId = 2,
                             CategoryId = 2,
                             CreatedBy = "System",
-                            Date = new DateTime(2025, 6, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4495),
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4499),
+                            Date = new DateTime(2025, 6, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8697),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8701),
                             DateIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOut = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4500),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8702),
                             Description = "A captivating music concert by JJ Lin, featuring his iconic hits.",
                             EventName = "Music Event: Music Concert by JJ Lin",
                             Location = "Singapore Indoor Stadium",
@@ -248,11 +251,11 @@ namespace EventRegistrationApplication.Migrations
                             EventId = 3,
                             CategoryId = 3,
                             CreatedBy = "System",
-                            Date = new DateTime(2025, 7, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4504),
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4507),
+                            Date = new DateTime(2025, 7, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8707),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8709),
                             DateIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOut = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4508),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8711),
                             Description = "An epic movie showdown between Godzilla and Groot.",
                             EventName = "Movie Event: Godzilla Vs Groot",
                             Location = "Gateway Theatre (Main Theatre)",
@@ -266,11 +269,11 @@ namespace EventRegistrationApplication.Migrations
                             EventId = 4,
                             CategoryId = 3,
                             CreatedBy = "System",
-                            Date = new DateTime(2025, 8, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4542),
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4545),
+                            Date = new DateTime(2025, 8, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8715),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8718),
                             DateIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOut = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4546),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8719),
                             Description = "Hello Kitty enters the titan battle, joining forces with the Attack on Titan crew in an unexpected crossover!",
                             EventName = "Movie Event: Hello Kitty joined the fight of the titans! ft Attack on Titans",
                             Location = "Gateway Theatre (Main Theatre)",
@@ -284,11 +287,11 @@ namespace EventRegistrationApplication.Migrations
                             EventId = 5,
                             CategoryId = 1,
                             CreatedBy = "System",
-                            Date = new DateTime(2025, 9, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4550),
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4553),
+                            Date = new DateTime(2025, 9, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8723),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8726),
                             DateIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOut = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4554),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8727),
                             Description = "Arsenal will take on Newcastle in a high-stakes Carabao Cup clash at the Emirates, aiming to bounce back from a tough first-leg result.",
                             EventName = "Football Match: Arsenal vs Newcastle",
                             Location = "National Stadium",
@@ -302,11 +305,11 @@ namespace EventRegistrationApplication.Migrations
                             EventId = 6,
                             CategoryId = 2,
                             CreatedBy = "System",
-                            Date = new DateTime(2025, 12, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4558),
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4561),
+                            Date = new DateTime(2025, 12, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8731),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8734),
                             DateIn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOut = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4562),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8735),
                             Description = "Enjoy an unforgettable night of soulful melodies and powerful performances at G.E.M's music concert!",
                             EventName = "Music Event: Music Concert by G.E.M",
                             Location = "Singapore Indoor Stadium",
@@ -404,10 +407,10 @@ namespace EventRegistrationApplication.Migrations
                         {
                             Id = "3781efa7-66dc-47f0-860f-e506d04102e4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e83ea98f-faff-431b-8e85-59e23a25a6a4",
+                            ConcurrencyStamp = "94053c4c-b6d0-4d57-8c2c-826cdc1c6d36",
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(8650),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(8675),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(6279),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(6309),
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -415,10 +418,10 @@ namespace EventRegistrationApplication.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIsi/crHTsWTGLoyEzHvZQKCYzXJ6IDi5mNfKFNEck+jaXF6ECb3F4ertL7885DNRQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECHYplZPZEwKYklC1WsdAgNnqFFw64/vZGU3xbp9swTpyDMlL9lRn8gq921960aiAw==",
                             PhoneNumber = "123-456-7890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4156acdb-90f0-4428-a01c-232f9319fb54",
+                            SecurityStamp = "dd917144-595e-4d57-bda6-3bf9afda6758",
                             TwoFactorEnabled = false,
                             UpdatedBy = "System",
                             UserName = "admin@localhost.com"
@@ -472,10 +475,10 @@ namespace EventRegistrationApplication.Migrations
                         {
                             RegistrationId = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4782),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4783),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8928),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8929),
                             EventId = 1,
-                            RegistrationDate = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(4780),
+                            RegistrationDate = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(8926),
                             SeatsReserved = 2,
                             UpdatedBy = "System",
                             UserId = 1
@@ -517,8 +520,8 @@ namespace EventRegistrationApplication.Migrations
                         {
                             StatusId = 1,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(5331),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(5332),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(9394),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(9395),
                             StatusName = "Active",
                             UpdatedBy = "System"
                         },
@@ -526,8 +529,8 @@ namespace EventRegistrationApplication.Migrations
                         {
                             StatusId = 2,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(5337),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 268, DateTimeKind.Local).AddTicks(5338),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(9400),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 474, DateTimeKind.Local).AddTicks(9401),
                             StatusName = "Inactive",
                             UpdatedBy = "System"
                         });
@@ -625,8 +628,8 @@ namespace EventRegistrationApplication.Migrations
                             VenueId = 1,
                             Capacity = 55000,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(9945),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(9949),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(8294),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(8299),
                             Location = "Singapore",
                             UpdatedBy = "System",
                             VenueName = "National Stadium"
@@ -636,8 +639,8 @@ namespace EventRegistrationApplication.Migrations
                             VenueId = 2,
                             Capacity = 12000,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(9955),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(9957),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(8307),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(8308),
                             Location = "Singapore",
                             UpdatedBy = "System",
                             VenueName = "Singapore Indoor Stadium"
@@ -647,8 +650,8 @@ namespace EventRegistrationApplication.Migrations
                             VenueId = 3,
                             Capacity = 922,
                             CreatedBy = "System",
-                            DateCreated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(9962),
-                            DateUpdated = new DateTime(2025, 2, 11, 10, 13, 4, 437, DateTimeKind.Local).AddTicks(9963),
+                            DateCreated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(8313),
+                            DateUpdated = new DateTime(2025, 2, 11, 10, 0, 4, 636, DateTimeKind.Local).AddTicks(8314),
                             Location = "Singapore",
                             UpdatedBy = "System",
                             VenueName = "Gateway Theatre (Main Theatre)"

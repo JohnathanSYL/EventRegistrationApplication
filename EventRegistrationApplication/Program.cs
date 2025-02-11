@@ -6,6 +6,7 @@ using EventRegistrationApplication.Components.Account;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using EventRegistrationApplication.Domain;
+using static EventRegistrationApplication.Components.Pages.UserPages.Index;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContextFactory<EventRegistrationApplicationContext>(options =>
@@ -26,6 +27,9 @@ builder.Services.AddScoped<IdentityUserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+
+
+
 
 builder.Services.AddAuthentication(options =>
     {

@@ -34,7 +34,7 @@
                 <AuthorizeView Roles="Administrator" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="categories">
-                        <span class="bi bi-list-nav-menu" aria-hidden="true"></span> Category
+                        <i class="fas fa-list-alt me-3" aria-hidden="true"></i> Category
                     </NavLink>
                 </div>
                 </AuthorizeView>
@@ -46,11 +46,11 @@
                 </div>
                 </AuthorizeView>
                 <AuthorizeView Roles="Administrator" Context="innerContext">
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link text-white fw-bold" href="registrations">
-                        <span class="bi bi-journal-text-nav-menu" aria-hidden="true"></span> Registrations
-                    </NavLink>
-                </div>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link text-white fw-bold" href="registrations">
+                            <i class="fas fa-clipboard-list me-4" aria-hidden="true"></i> Registrations
+                        </NavLink>
+                    </div>
                 </AuthorizeView>
                 <AuthorizeView Roles="Administrator" Context="innerContext">
                 <div class="nav-item px-3">
@@ -62,57 +62,62 @@
                 <AuthorizeView Roles="Administrator" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="statuses">
-                        <span class="bi bi-flag-nav-menu" aria-hidden="true"></span> Status
+                        <i class="fas fa-check-circle me-3" aria-hidden="true"></i> Status
                     </NavLink>
                 </div>
                 </AuthorizeView>
                 <AuthorizeView Roles="Administrator" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="users">
-                        <span class="bi bi-person-circle-nav-menu" aria-hidden="true"></span> User
+                        <i class="fas fa-users me-3" aria-hidden="true"></i> User
                     </NavLink>
                 </div>
                 </AuthorizeView>
                 <AuthorizeView Roles="Administrator" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="venues">
-                        <span class="bi bi-house-door-nav-menu" aria-hidden="true"></span> Venue
-                    </NavLink>
+                        <i class="fas fa-map-marker-alt me-3" aria-hidden="true"></i> Venue
+                        </NavLink>
                 </div>
                 </AuthorizeView>
+                <AuthorizeView Roles="User" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="/events">
                         <i class="fas fa-calendar-alt me-3" style="font-size: 1.2rem;" aria-hidden="true"></i> View Events
                     </NavLink>
                 </div>
+                </AuthorizeView>
+                <AuthorizeView Roles="User" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="/payment">
                         <i class="fas fa-credit-card me-3" style="font-size: 1.2rem;" aria-hidden="true"></i> Payment
                     </NavLink>
                 </div>
+                </AuthorizeView>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="/purchase-history">
                         <i class="fas fa-box-open me-3" style="font-size: 1.2rem;" aria-hidden="true"></i> Purchase History
                     </NavLink>
                 </div>
-
+                <AuthorizeView Roles="User" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="/my-tickets">
                         <i class="fas fa-ticket-alt me-3" style="font-size: 1.2rem;" aria-hidden="true"></i> My Tickets
                     </NavLink>
                 </div>
-
+                </AuthorizeView>
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="/event-history">
                         <i class="fas fa-calendar-check me-3" style="font-size: 1.2rem;" aria-hidden="true"></i> Event History
                     </NavLink>
                 </div>
-
+                <AuthorizeView Roles="User" Context="innerContext">
                 <div class="nav-item px-3">
                     <NavLink class="nav-link text-white fw-bold" href="/discount-vouchers">
                         <i class="fas fa-tags me-3" style="font-size: 1.2rem;" aria-hidden="true"></i> Discount Vouchers
                     </NavLink>
                 </div>
+                </AuthorizeView>
                 <div class="nav-item px-3">
                     <form action="Account/Logout" method="post">
                         <AntiforgeryToken />

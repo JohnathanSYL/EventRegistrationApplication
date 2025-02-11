@@ -5,30 +5,60 @@
 @using EventRegistrationApplication.Data
 @implements IAsyncDisposable
 @inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@rendermode InteractiveServer
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Statuses</PageTitle>
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Status Management</h1>
+        <a class="btn btn-primary" href="statuses/create">Create New</a>
+    </div>
 
-<p>
-    <a href="statuses/create">Create New</a>
-</p>
+    <div class="table-responsive">
+        <QuickGrid Class="table table-striped table-hover" Items="context.Status" Pagination="paginationState">
+            <PropertyColumn Property="status => status.StatusName" Title="Status Name" Sortable="true" />
+            <PropertyColumn Property="status => status.DateCreated" Title="Date Created" Sortable="true" />
+            <PropertyColumn Property="status => status.DateUpdated" Title="Date Updated" Sortable="true" />
+            <PropertyColumn Property="status => status.CreatedBy" Title="Created By" Sortable="true" />
+            <PropertyColumn Property="status => status.UpdatedBy" Title="Updated By" Sortable="true" />
 
-<QuickGrid Class="table" Items="context.Status">
-    <PropertyColumn Property="status => status.StatusName" />
-    <PropertyColumn Property="status => status.DateCreated" />
-    <PropertyColumn Property="status => status.DateUpdated" />
-    <PropertyColumn Property="status => status.CreatedBy" />
-    <PropertyColumn Property="status => status.UpdatedBy" />
+            <TemplateColumn Context="status" Title="Status">
+                <div class="badge" style="background-color: @(status.StatusName switch
+                {
+                    "Active" => "green",
+                    "Inactive" => "red",
+                    "Scheduled" => "blue",
+                    "Completed" => "gray",
+                    "Cancelled" => "orange",
+                    "Postponed" => "yellow",
+                    "Pending" => "purple",
+                    "Ongoing" => "teal",
+                    "Closed" => "darkgray",
+                    "Draft" => "lightgray",
+                    "Rescheduled" => "brown",
+                    _ => "gray"
+                }); color: white; padding: 0.3rem 0.6rem; border-radius: 0.5rem;">
+                    @(status.StatusName)
+                </div>
+            </TemplateColumn>
 
-    <TemplateColumn Context="status">
-        <a href="@($"statuses/edit?statusid={status.StatusId}")">Edit</a> |
-        <a href="@($"statuses/details?statusid={status.StatusId}")">Details</a> |
-        <a href="@($"statuses/delete?statusid={status.StatusId}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+            <TemplateColumn Context="status">
+                <div class="d-flex">
+                    <a class="btn btn-sm btn-warning me-2" href="@($"statuses/edit?statusid={status.StatusId}")">Edit</a>
+                    <a class="btn btn-sm btn-info me-2" href="@($"statuses/details?statusid={status.StatusId}")">Details</a>
+                    <a class="btn btn-sm btn-danger" href="@($"statuses/delete?statusid={status.StatusId}")">Delete</a>
+                </div>
+            </TemplateColumn>
+        </QuickGrid>
+
+        <Paginator State="paginationState" />
+    </div>
+</div>
 
 @code {
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 20 };
+
     private EventRegistrationApplicationContext context = default!;
 
     protected override void OnInitialized()

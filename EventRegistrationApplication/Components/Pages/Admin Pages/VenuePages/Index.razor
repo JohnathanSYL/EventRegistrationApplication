@@ -6,29 +6,55 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Venues</PageTitle>
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Venues</h1>
 
-<p>
-    <a href="venues/create">Create New</a>
-</p>
+    <p>
+        <a class="btn btn-primary" href="venues/create">Create New</a>
+    </p>
 
-<QuickGrid Class="table" Items="context.Venue">
-    <PropertyColumn Property="venue => venue.VenueName" />
-    <PropertyColumn Property="venue => venue.Location" />
-    <PropertyColumn Property="venue => venue.Capacity" />
-    <PropertyColumn Property="venue => venue.DateCreated" />
-    <PropertyColumn Property="venue => venue.DateUpdated" />
-    <PropertyColumn Property="venue => venue.CreatedBy" />
-    <PropertyColumn Property="venue => venue.UpdatedBy" />
-
-    <TemplateColumn Context="venue">
-        <a href="@($"venues/edit?venueid={venue.VenueId}")">Edit</a> |
-        <a href="@($"venues/details?venueid={venue.VenueId}")">Details</a> |
-        <a href="@($"venues/delete?venueid={venue.VenueId}")">Delete</a>
-    </TemplateColumn>
-</QuickGrid>
+    @if (context.Venue.Any())
+    {
+        <div class="row">
+            @foreach (var venue in context.Venue)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@venue.VenueName</h5>
+                            <p class="card-text">
+                                <strong>Location:</strong> @venue.Location <br />
+                                <strong>Capacity:</strong>
+                                <span class="badge @(venue.Capacity >= 100 ? "bg-success" : "bg-warning")">
+                                    @venue.Capacity
+                                </span>
+                            </p>
+                            <p class="card-text">
+                                <small><em>Created on @venue.DateCreated.ToString("MMMM dd, yyyy")</em></small>
+                            </p>
+                            <p class="card-text">
+                                <small><em>Updated on @venue.DateUpdated.ToString("MMMM dd, yyyy")</em></small>
+                            </p>
+                            <div class="d-flex flex-column gap-2">
+                                <a href="@($"venues/edit?venueid={venue.VenueId}")" class="btn btn-lg btn-info w-100 mb-2">Edit</a>
+                                <a href="@($"venues/details?venueid={venue.VenueId}")" class="btn btn-lg btn-secondary w-100 mb-2">Details</a>
+                                <a href="@($"venues/delete?venueid={venue.VenueId}")" class="btn btn-lg btn-danger w-100 mb-2">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            <strong>No venues available!</strong> Please add some venues to the system.
+        </div>
+    }
+</div>
 
 @code {
     private EventRegistrationApplicationContext context = default!;

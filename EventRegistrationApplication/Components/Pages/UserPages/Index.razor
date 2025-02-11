@@ -3,39 +3,59 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @using EventRegistrationApplication.Domain
 @using EventRegistrationApplication.Data
+@using System.Security.Claims
 @implements IAsyncDisposable
 @inject IDbContextFactory<EventRegistrationApplication.Data.EventRegistrationApplicationContext> DbFactory
+@rendermode InteractiveServer
 
-<PageTitle>Index</PageTitle>
+<PageTitle>User Management</PageTitle>
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>User Management</h1>
+        <a class="btn btn-primary" href="users/create">Create New User</a>
+    </div>
 
-<p>
-    <a href="users/create">Create New</a>
-</p>
+    <div class="d-flex mb-4">
+        <input class="form-control me-2" placeholder="Search users..." />
+    </div>
 
-<QuickGrid Class="table" Items="context.User">
-    <PropertyColumn Property="user => user.Name" />
-    <PropertyColumn Property="user => user.Email" />
-    <PropertyColumn Property="user => user.Password" />
-    <PropertyColumn Property="user => user.PhoneNumber" />
-    <PropertyColumn Property="user => user.Role" />
-    <PropertyColumn Property="user => user.ProfilePicPreferences" />
-    <PropertyColumn Property="user => user.DateCreated" />
-    <PropertyColumn Property="user => user.DateUpdated" />
-    <PropertyColumn Property="user => user.CreatedBy" />
-    <PropertyColumn Property="user => user.UpdatedBy" />
+    <div class="table-responsive">
+        <QuickGrid Class="table table-striped table-hover" Items="context.User" Pagination="paginationState">
+            <PropertyColumn Property="user => user.Name" Title="Name" Sortable="true" />
+            <PropertyColumn Property="user => user.Email" Title="Email" Sortable="true" />
+            <PropertyColumn Property="user => user.PhoneNumber" Title="Phone" Sortable="true" />
 
-    <TemplateColumn Context="user">
-        <a href="@($"users/edit?userid={user.UserId}")">Edit</a> |
-        <a href="@($"users/details?userid={user.UserId}")">Details</a> |
-        <AuthorizeView Roles="Administrator">
-        <a href="@($"users/delete?userid={user.UserId}")">Delete</a>
-        </AuthorizeView>
-    </TemplateColumn>
-</QuickGrid>
+            <TemplateColumn Context="user" Title="Role">
+                <span class="badge" style="background-color: @(user.Role == "Admin" || user.Role == "Administrator" ? "purple" : "green"); color: white;">
+                    @(user.Role)
+                </span>
+            </TemplateColumn>
+
+            <PropertyColumn Property="user => user.ProfilePicPreferences" Title="Profile Pic" Sortable="true" />
+            <PropertyColumn Property="user => user.DateCreated" Title="Date Created" Sortable="true" />
+            <PropertyColumn Property="user => user.DateUpdated" Title="Date Updated" Sortable="true" />
+            <PropertyColumn Property="user => user.CreatedBy" Title="Created By" Sortable="true" />
+            <PropertyColumn Property="user => user.UpdatedBy" Title="Updated By" Sortable="true" />
+
+            <TemplateColumn Context="user">
+                <div class="d-flex">
+                    <a class="btn btn-sm btn-warning me-2" href="@($"users/edit?userid={user.UserId}")">Edit</a>
+                    <a class="btn btn-sm btn-info me-2" href="@($"users/details?userid={user.UserId}")">Details</a>
+                    <AuthorizeView Roles="Administrator">
+                        <a class="btn btn-sm btn-danger" href="@($"users/delete?userid={user.UserId}")">Delete</a>
+                    </AuthorizeView>
+                </div>
+            </TemplateColumn>
+        </QuickGrid>
+
+        <Paginator State="paginationState" />
+    </div>
+</div>
 
 @code {
+    PaginationState paginationState = new PaginationState { ItemsPerPage = 10 };
+
     private EventRegistrationApplicationContext context = default!;
 
     protected override void OnInitialized()

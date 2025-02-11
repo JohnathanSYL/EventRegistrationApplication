@@ -1,0 +1,44 @@
+﻿/* Glow Dark Purple Background */
+.register-background {
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #3d0c5c, #7a3c94, #4f1c74); /* Dark purple gradient */
+    background-size: 300% 300%;
+    animation: glowing 3s ease infinite; /* Apply the glowing animation */
+}
+
+/* Glowing Animation */
+@keyframes glowing {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Optional Form Styling */
+.register-container {
+    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Input Glowing Effect */
+input, button {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    transition: box-shadow 0.3s ease;
+}
+
+    input:focus, button:hover {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+    }

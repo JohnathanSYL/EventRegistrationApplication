@@ -14,6 +14,9 @@ namespace EventRegistrationApplication.Data
         public DbSet<EventRegistrationApplication.Domain.Status> Status { get; set; } = default!;
         public DbSet<EventRegistrationApplication.Domain.User> User { get; set; } = default!;
         public DbSet<EventRegistrationApplication.Domain.Venue> Venue { get; set; } = default!;
+        
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

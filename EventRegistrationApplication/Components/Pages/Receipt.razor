@@ -1,0 +1,59 @@
+﻿@page "/receipt"
+@using EventRegistrationApplication.Domain
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Components.Routing
+
+@{
+    var receiptNumber = Navigation.Uri.Split('?').LastOrDefault()?.Split('=').LastOrDefault();
+    var receipt = GetReceiptDetails(receiptNumber);
+}
+
+<h3>Receipt Details</h3>
+
+@if (receipt != null)
+{
+    <div>
+        <p><strong>Receipt Number:</strong> @receipt.ReceiptNumber</p>
+        <p><strong>Amount Purchased:</strong> @receipt.AmountPurchased</p>
+    </div>
+}
+else
+{
+    <p>Receipt not found.</p>
+}
+
+@code {
+    // Sample method to simulate receipt fetching. Replace with actual database logic
+    private ReceiptModel GetReceiptDetails(string receiptNumber)
+    {
+        // Simulating database or data retrieval
+        var sampleReceipts = new List<ReceiptModel>
+        {
+            new ReceiptModel { ReceiptNumber = "Tx0000", AmountPurchased = 50.00m },
+            new ReceiptModel { ReceiptNumber = "Tx0001", AmountPurchased = 100.00m }
+        };
+
+        return sampleReceipts.FirstOrDefault(r => r.ReceiptNumber == receiptNumber);
+    }
+
+    public class ReceiptModel
+    {
+        public string ReceiptNumber { get; set; }
+        public decimal AmountPurchased { get; set; }
+    }
+
+    // Simulate generating the next receipt number
+    private string GenerateReceiptNumber()
+    {
+        int latestReceiptNumber = GetLatestReceiptNumber();
+        latestReceiptNumber++; // Increment the number
+        return $"Tx{latestReceiptNumber:D4}"; // Format the number with leading zeros
+    }
+
+    private int GetLatestReceiptNumber()
+    {
+        // Simulate getting the latest receipt number from your database
+        // For this example, we just return a hard-coded value
+        return 0; // Example: the most recent receipt number is "Tx0000"
+    }
+}

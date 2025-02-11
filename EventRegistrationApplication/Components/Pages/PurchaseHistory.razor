@@ -1,0 +1,72 @@
+﻿@page "/purchase-history"
+@using EventRegistrationApplication.Domain
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Components
+@using System.Globalization
+
+<PageTitle>Purchase History</PageTitle>
+
+<div class="container mt-4">
+    <h3>Your Purchase History</h3>
+
+    @if (receipts.Any())
+    {
+        <div class="row">
+            @foreach (var receipt in receipts)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Receipt Number: @receipt.ReceiptNumber</h5>
+                            <p class="card-text">
+                                <strong>Amount Purchased:</strong>
+                                <span class="text-success">
+                                    $@receipt.AmountPurchased.ToString("F2", CultureInfo.InvariantCulture)
+                                </span>
+                            </p>
+                            <p class="card-text">
+                                <small><em>Purchased on @receipt.DatePurchased.ToString("MMMM dd, yyyy")</em></small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <strong>No purchases yet!</strong> You have no past purchases.
+        </div>
+    }
+</div>
+
+@code {
+    private List<ReceiptModel> receipts;
+
+    protected override void OnInitialized()
+    {
+        // Fetch receipts for the current user. For now, we simulate the data.
+        // Replace with logic to fetch actual data from the database or API.
+
+        receipts = GetUserPurchaseHistory();
+    }
+
+    private List<ReceiptModel> GetUserPurchaseHistory()
+    {
+        // Simulating past receipts for a user (replace with actual database call)
+        return new List<ReceiptModel>
+        {
+            new ReceiptModel { ReceiptNumber = "Tx0000", AmountPurchased = 50.00m, DatePurchased = DateTime.Now.AddMonths(-1) },
+            new ReceiptModel { ReceiptNumber = "Tx0001", AmountPurchased = 100.00m, DatePurchased = DateTime.Now.AddMonths(-2) },
+            new ReceiptModel { ReceiptNumber = "Tx0002", AmountPurchased = 75.00m, DatePurchased = DateTime.Now.AddMonths(-3) }
+        };
+    }
+
+    public class ReceiptModel
+    {
+        public string ReceiptNumber { get; set; }
+        public decimal AmountPurchased { get; set; }
+        public DateTime DatePurchased { get; set; } // The date when the purchase was made
+    }
+}
