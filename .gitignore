@@ -361,3 +361,12 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/EventRegistrationApplication/Components/Pages/SeatSelection.razor
+/EventRegistrationApplication/Configurations/Entities/SeatSelectionSeed.cs
+/EventRegistrationApplication/Domain/SeatSelection.cs
+/EventRegistrationApplication/Configurations/Entities/SeatStatusSeed.cs
+/EventRegistrationApplication/Migrations/20250210080148_AddSeatStatusModelAndSeedData.cs
+/EventRegistrationApplication/Migrations/20250210080148_AddSeatStatusModelAndSeedData.Designer.cs
+/EventRegistrationApplication/Domain/SeatStatusModel.cs
+/.gitignore
+/EventRegistrationApplication/Components/Pages/SeatSelection.razor
