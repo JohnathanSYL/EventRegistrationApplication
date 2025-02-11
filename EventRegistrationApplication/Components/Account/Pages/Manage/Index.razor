@@ -10,27 +10,44 @@
 @inject IdentityUserAccessor UserAccessor
 @inject IdentityRedirectManager RedirectManager
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
 <PageTitle>Profile</PageTitle>
 
-<h3>Profile</h3>
-<StatusMessage />
+<div class="container py-4">
+    <div class="card shadow-sm border-0 rounded" style="background-color: #6f42c1;">
+        <div class="card-header text-white text-center rounded-top" style="background-color: #6f42c1;">
+            <h3 class="mb-0">Manage Profile</h3>
+        </div>
+        <div class="card-body p-4 rounded-bottom" style="background-color: #f4f4f4;">
+            <StatusMessage />
+            <EditForm Model="Input" FormName="profile" OnValidSubmit="OnValidSubmitAsync" method="post" class="needs-validation">
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" role="alert" />
 
-<div class="row">
-    <div class="col-md-6">
-        <EditForm Model="Input" FormName="profile" OnValidSubmit="OnValidSubmitAsync" method="post">
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" role="alert" />
-            <div class="form-floating mb-3">
-                <input type="text" value="@username" class="form-control" placeholder="Please choose your username." disabled />
-                <label for="username" class="form-label">Username</label>
-            </div>
-            <div class="form-floating mb-3">
-                <InputText @bind-Value="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
-                <label for="phone-number" class="form-label">Phone number</label>
-                <ValidationMessage For="() => Input.PhoneNumber" class="text-danger" />
-            </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </EditForm>
+                <!-- Username Field with Icon -->
+                <div class="mb-3">
+                    <label for="username" class="form-label fw-bold">
+                        <i class="fas fa-user me-2"></i>Username
+                    </label>
+                    <input type="text" value="@username" class="form-control rounded" placeholder="Your username" disabled />
+                </div>
+
+                <!-- Phone Number Field with Icon -->
+                <div class="mb-3">
+                    <label for="phone-number" class="form-label fw-bold">
+                        <i class="fas fa-phone-alt me-2"></i>Phone Number
+                    </label>
+                    <InputText @bind-Value="Input.PhoneNumber" class="form-control rounded" placeholder="Enter your phone number" />
+                    <ValidationMessage For="() => Input.PhoneNumber" class="text-danger" />
+                </div>
+
+                <!-- Save Button with Icon and Purple Color -->
+                <button type="submit" class="btn w-100 py-2 rounded" style="background-color: #6f42c1; color: white;">
+                    <i class="fas fa-save me-2"></i>Save Changes
+                </button>
+            </EditForm>
+        </div>
     </div>
 </div>
 
